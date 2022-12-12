@@ -1,5 +1,11 @@
   local cmp = require'cmp'
 
+  local check_backspace = function()
+      local col = vim.fn.col "." - 1
+      return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+  end
+    
+
  cmp.setup({
     snippet = {
       expand = function(args)
@@ -17,8 +23,8 @@
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
             cmp.select_next_item()
-        elseif luasnip.expandable() then
-            luasnip.expand()
+        elseif require("luasnip").expandable() then
+            require("luasnip").expand()
         elseif check_backspace() then
             fallback()
         else
