@@ -5,6 +5,7 @@
       return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
   end
     
+  require("luasnip.loaders.from_vscode").lazy_load()
 
  cmp.setup({
     snippet = {
@@ -67,7 +68,3 @@
     })
   })
 
-  local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  require('lspconfig')['rust_analyzer'].setup {
-    capabilities = capabilities
-  }
